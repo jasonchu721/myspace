@@ -48,6 +48,9 @@ class Navbar extends React.Component {
           <Link to="/my_friends">
             <Menu.Item name="Friends"/>
           </Link>
+          <Link to="/requests">
+            <Menu.Item name="Friend Requests"/>
+          </Link>
           { this.rightNavItems()}
         </Menu>
       </div>

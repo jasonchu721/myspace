@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Header, Card, Divider, Image, } from 'semantic-ui-react';
+import { Header, Button, Icon, Card, Divider, Image, } from 'semantic-ui-react';
 
 class MyFriends extends React.Component {
   state = { friends: [], };
@@ -10,12 +10,18 @@ class MyFriends extends React.Component {
       .then( res => this.setState({ friends: res.data, }) );
   }
 
+  defriend = (id) => {
+    const { friends,} = this.state;
+    this.setState({ friends: friends.filter(f => f.id !== id)})
+  }
+
+
   render() {
-    const { friends, } = this.state;
+    const { friends, id } = this.state;
     return (
       <>
       <br />
-      <Header as='h1'> Friends List </Header>
+      <Header as='h1' textAlign="center"> Friends List </Header>
       <br />
       <Card.Group itemsPerRow={4}>
         { friends.map( friend =>
@@ -26,6 +32,9 @@ class MyFriends extends React.Component {
               <Card.Header>
                 { friend.name }
               </Card.Header>
+              <Button color="black" basic onClick={() => this.defriend(friend.id)}>
+              Not Friends Anymore
+              </Button>
             </Card.Content>
           </Card>
         )}
